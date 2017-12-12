@@ -54,7 +54,7 @@ stock CompassSetString(angle)
 	return uic__string;
 }
 
-stock  CompassHeadingNorth(angle)
+stock CompassHeadingNorth(angle)
 {
 	uic__N = angle / 15;
 
