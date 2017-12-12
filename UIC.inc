@@ -60,20 +60,16 @@ stock CompassSetString(angle)
 	return uic__string;
 }
 
-stock CompassHeadingNorth(angle)
+static stock CompassHeadingNorth(angle)
 {
 	uic__N = angle / 15;
 
-	if (!(uic__min_N < uic__N <= uic__max_N))
+	if (uic__N >= uic__max_N)
+		uic__N = 24 - uic__N + uic__min_N;
+	else
 	{
-		if (uic__N >= uic__max_N)
-			uic__N = 24 - uic__N + uic__min_N;
-		else
-		{
-			uic__N -= uic__min_N ;
-			uic__N = ~uic__N + 1; 
-		}
-
+		uic__N -= uic__min_N ;
+		uic__N = ~uic__N + 1; 
 	}
 
 	return uic__N;
