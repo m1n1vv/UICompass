@@ -11,24 +11,33 @@
 
 Функции
 ---------
+
 **GetDirectionCompass** - округляет направление до кратного 15.
+
 ```pawn
 GetDirectionCompass(Float:angle);
 ```
+
 > * **Float:angle** - нынешнее направление игрока
 
 ---------
+
 **CompassSetString** - создает строку с направлением игрока.
+
 ```pawn
 CompassSetString(angle);
 ```
+
 > * **angle** - направление игрока полученное из GetDirectionCompass
 
 ---------
+
 **CompassHeadingNorth** - определяет, в каком из TD будет выведено "N".
+
 ```pawn
 CompassHeadingNorth(angle);
 ```
+
 > * **angle** - направление игрока полученное из GetDirectionCompass
 
 Директивы
