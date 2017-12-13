@@ -1,4 +1,5 @@
 # UICompass 
+
 > Версия: V3
 
 ![Image alt](http://tscars.narod.ru/p-w/new/N.png)
@@ -42,12 +43,14 @@ CompassHeadingNorth(angle);
 
 Директивы
 ---------
+
 Директивы|Описание
 ---|---
 UICOMPASS_MAX_TD|Количество TD, которое будет использоваться в Вашем компасе. По умолчанию 7.
 
 Применение
 ---------
+
 Создаем коллбэк для таймера.
 
 ![Image alt](http://tscars.narod.ru/p-w/new/compass.png)
