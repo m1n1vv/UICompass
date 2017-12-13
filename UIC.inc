@@ -88,6 +88,7 @@ public OnGameModeInit()
 #if defined uic__OnGameModeInit
     uic__OnGameModeInit();
 #endif
+
     return 1;
 }
 
