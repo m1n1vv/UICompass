@@ -1,5 +1,5 @@
 #if  defined UICOMPASS
-    #endinput
+	#endinput
 #endif
 #define UICOMPASS
 
@@ -10,7 +10,7 @@
 static const
 	uic__str[][] =
 	{
-	    "NE", "E", "SE", "S", "SW", "W", "NW", "N"
+		"NE", "E", "SE", "S", "SW", "W", "NW", "N"
 	};
 
 static
@@ -30,7 +30,7 @@ stock GetDirectionCompass(Float:angle)
 	uic__result = uic__multiple * 15;
 
 	if (uic__round - uic__result > 5)
-	    uic__result = ++uic__multiple * 15;
+		uic__result = ++uic__multiple * 15;
 
 	uic__result = 360 - uic__result;
 
@@ -42,18 +42,18 @@ stock CompassSetString(angle)
 	uic__diff = 0;
 
 	if (angle > 360)
-	    angle -= 360;
+		angle -= 360;
 	else if (angle < 0)
-	    angle += 360;
+		angle += 360;
 
 	if (!angle)
-	    angle = 360;
+		angle = 360;
 	
 	if (angle % 45 == 0)
 		uic__diff = angle / 45;
 
 	if (uic__diff)
-	    strcat((uic__string[0] = EOS, uic__string), uic__str[uic__diff-1]);
+		strcat((uic__string[0] = EOS, uic__string), uic__str[uic__diff-1]);
  	else
 		valstr(uic__string, angle);
 
@@ -86,18 +86,18 @@ public OnGameModeInit()
 	uic__max_N = 24 - getN;
 
 #if defined uic__OnGameModeInit
-    uic__OnGameModeInit();
+	uic__OnGameModeInit();
 #endif
 
     return 1;
 }
 
 #if defined _ALS_OnGameModeInit
-    #undef OnGameModeInit
+	#undef OnGameModeInit
 #else
-    #define _ALS_OnGameModeInit
+	#define _ALS_OnGameModeInit
 #endif
 #define  OnGameModeInit uic__OnGameModeInit
 #if defined uic__OnGameModeInit
-forward uic__OnGameModeInit();
+	forward uic__OnGameModeInit();
 #endif
