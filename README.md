@@ -16,12 +16,14 @@
 GetDirectionCompass(Float:angle);
 ```
 > * **Float:angle** - нынешнее направление игрока
+
 ---------
 **CompassSetString** - создает строку с направлением игрока.
 ```pawn
 CompassSetString(angle);
 ```
 > * **angle** - направление игрока полученное из GetDirectionCompass
+
 ---------
 **CompassHeadingNorth** - определяет, в каком из TD будет выведено "N".
 ```pawn
