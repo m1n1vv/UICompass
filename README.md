@@ -1,6 +1,6 @@
 # UICompass 
 
-> Версия: V3
+> Версия: V4
 
 ![Image alt](http://tscars.narod.ru/p-w/new/N.png)
 
@@ -13,20 +13,20 @@
 Функции
 ---------
 
-**GetDirectionCompass** - округляет направление до кратного 15.
+**RoundCompassDirection** - округляет направление до кратного 15.
 
 ```pawn
-GetDirectionCompass(Float:angle);
+RoundCompassDirection(Float:angle);
 ```
 
 > * **Float:angle** - нынешнее направление игрока
 
 ---------
 
-**CompassSetString** - создает строку с направлением игрока.
+**CreateCompassString** - создает строку с направлением игрока.
 
 ```pawn
-CompassSetString(angle);
+CreateCompassString(angle);
 ```
 
 > * **angle** - направление игрока полученное из GetDirectionCompass
@@ -46,7 +46,7 @@ CompassHeadingNorth(angle);
 
 | Директивы | Описание | 
 | ------------- |------------------|
-| UICOMPASS_MAX_TD     | Количество TD, которое будет использоваться в Вашем компасе. По умолчанию 7. |
+| MAX_UICOMPASS_TD | Количество TD, которое будет использоваться в Вашем компасе. По умолчанию 7. |
 
 Применение
 ---------
@@ -64,29 +64,27 @@ public UICompassTimer(playerid)
         result,
         Float:angle;
 
-    north = 0;
-
     //Узнаем направление игрока
     GetPlayerFacingAngle(playerid, angle);
 
     //Получаем направление кратное 15
-    result = GetDirectionCompass(angle);
+    result = RoundCompassDirection(angle);
 
     //Узнаем, в каком TD будет выведено "N"
     north = CompassHeadingNorth(result);
 
     //Три предыдущих направления
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][0], CompassSetString(result-45));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][1], CompassSetString(result-30));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][2], CompassSetString(result-15));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][0], CreateCompassString(result-45));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][1], CreateCompassString(result-30));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][2], CreateCompassString(result-15));
 
     //Нынешнее направление
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][3], CompassSetString(result));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][3], CreateCompassString(result));
 
     //Три последующих направления
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][4], CompassSetString(result+15));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][5], CompassSetString(result+30));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][6], CompassSetString(result+45));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][4], CreateCompassString(result+15));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][5], CreateCompassString(result+30));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][6], CreateCompassString(result+45));
 
     //Устанавливаем всем TD изначальный цвет (Готов выслушать предложения по упрощению)
     PlayerTextDrawColor(playerid, td_uicompass[playerid][0], 0xFFFFFFFF);
@@ -105,7 +103,7 @@ public UICompassTimer(playerid)
     PlayerTextDrawShow(playerid, td_uicompass[playerid][6]);
     
     //Устанавливаем нужному TD желтый цвет, где будет выведено "N"
-    if (0 <= north < UICOMPASS_MAX_TD)
+    if (0 <= north < MAX_UICOMPASS_TD)
     {
         PlayerTextDrawColor(playerid, td_uicompass[playerid][north], 0xFFFF00FF);
         PlayerTextDrawShow(playerid, td_uicompass[playerid][north]);
