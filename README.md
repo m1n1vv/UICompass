@@ -1,6 +1,6 @@
 # UICompass 
 
-> Версия: V4
+> Версия: V5
 
 ![Image alt](http://tscars.narod.ru/p-w/new/N.png)
 
