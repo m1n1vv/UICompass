@@ -7,6 +7,10 @@
 	#define MAX_UICOMPASS_TD		7
 #endif
 
+#if !defined UICOMPASS_STEP
+	#define UICOMPASS_STEP			15
+#endif
+
 #if MAX_UICOMPASS_TD % 2 == 0
 	#error only an odd number of TextDraws is supported
 #endif
@@ -14,8 +18,8 @@
 static const
 	uic__scale = 360,
 	uic__interval_main_directions = 360 / 8,
-	uic__min_step = 15,
-	uic__max_directions = 360 / 15,
+	uic__max_directions = 360 / UICOMPASS_STEP,
+	uic__error = UICOMPASS_STEP / 3 + 1,
 	uic__str_main_direction[][] =
 	{
 		"NE", "E", "SE", "S", "SW", "W", "NW", "N"
@@ -34,11 +38,11 @@ static
 stock GetCompassDirection(Float:angle)
 {
 	uic__round = floatround(angle);
-	uic__multiple = uic__round / uic__min_step;
-	uic__result = uic__multiple * uic__min_step;
+	uic__multiple = uic__round / UICOMPASS_STEP;
+	uic__result = uic__multiple * UICOMPASS_STEP;
 
-	if (uic__round - uic__result > 5)
-		uic__result = ++uic__multiple * uic__min_step;
+	if (uic__round - uic__result > uic__error)
+		uic__result = ++uic__multiple * UICOMPASS_STEP;
 
 	uic__result = uic__scale - uic__result;
 
@@ -67,7 +71,7 @@ stock CreateCompassString(angle)
 
 stock CompassHeadingNorth(angle)
 {
-	uic__N = angle / uic__min_step;
+	uic__N = angle / UICOMPASS_STEP;
 
 	if (uic__N >= uic__max_N)
 		uic__N = uic__max_directions - uic__N + uic__min_N;
