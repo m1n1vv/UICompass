@@ -29,7 +29,7 @@ RoundCompassDirection(Float:angle);
 CreateCompassString(angle);
 ```
 
-> * **angle** - направление игрока полученное из GetDirectionCompass
+> * **angle** - направление игрока полученное из RoundCompassDirection
 
 ---------
 
@@ -39,7 +39,7 @@ CreateCompassString(angle);
 CompassHeadingNorth(angle);
 ```
 
-> * **angle** - направление игрока полученное из GetDirectionCompass
+> * **angle** - направление игрока полученное из RoundCompassDirection
 
 Директивы
 ---------
@@ -47,6 +47,7 @@ CompassHeadingNorth(angle);
 | Директивы | Описание | 
 | ------------- |------------------|
 | MAX_UICOMPASS_TD | Количество TD, которое будет использоваться в Вашем компасе. По умолчанию 7. |
+| UICOMPASS_STEP | Минимальный шаг в градусах. По умолчанию 15. |
 
 Применение
 ---------
@@ -59,6 +60,11 @@ CompassHeadingNorth(angle);
 forward UICompassTimer(playerid);
 public UICompassTimer(playerid)
 {
+    static const
+        step_1 = UICOMPASS_STEP * 1,
+        step_2 = UICOMPASS_STEP * 2,
+        step_3 = UICOMPASS_STEP * 3;
+        
     static
         north,
         result,
@@ -74,17 +80,17 @@ public UICompassTimer(playerid)
     north = CompassHeadingNorth(result);
 
     //Три предыдущих направления
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][0], CreateCompassString(result-45));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][1], CreateCompassString(result-30));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][2], CreateCompassString(result-15));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][0], CreateCompassString(result - step_3));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][1], CreateCompassString(result - step_2));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][2], CreateCompassString(result - step_1));
 
     //Нынешнее направление
     PlayerTextDrawSetString(playerid, td_uicompass[playerid][3], CreateCompassString(result));
 
     //Три последующих направления
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][4], CreateCompassString(result+15));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][5], CreateCompassString(result+30));
-    PlayerTextDrawSetString(playerid, td_uicompass[playerid][6], CreateCompassString(result+45));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][4], CreateCompassString(result + step_1));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][5], CreateCompassString(result + step_2));
+    PlayerTextDrawSetString(playerid, td_uicompass[playerid][6], CreateCompassString(result + step_3));
 
     //Устанавливаем всем TD изначальный цвет (Готов выслушать предложения по упрощению)
     PlayerTextDrawColor(playerid, td_uicompass[playerid][0], 0xFFFFFFFF);
