@@ -93,9 +93,9 @@ public OnGameModeInit()
 	uic__max_N = uic__max_directions - getN;
 
 #if defined uic__OnGameModeInit
-    uic__OnGameModeInit();
+	uic__OnGameModeInit();
 #endif
-    return 1;
+	return 1;
 }
 
 #if defined _ALS_OnGameModeInit
