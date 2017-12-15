@@ -13,7 +13,7 @@
 Функции
 ---------
 
-**RoundCompassDirection** - округляет направление до кратного 15.
+**RoundCompassDirection** - округляет направление до кратного UICOMPASS_STEP.
 
 ```pawn
 RoundCompassDirection(Float:angle);
@@ -73,7 +73,7 @@ public UICompassTimer(playerid)
     //Узнаем направление игрока
     GetPlayerFacingAngle(playerid, angle);
 
-    //Получаем направление кратное 15
+    //Получаем направление кратное UICOMPASS_STEP
     result = RoundCompassDirection(angle);
 
     //Узнаем, в каком TD будет выведено "N"
