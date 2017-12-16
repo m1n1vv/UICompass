@@ -1,5 +1,5 @@
 /*
-	UICompass v0.5
+	UICompass v0.6
 	by m1n1vv
 */
 
