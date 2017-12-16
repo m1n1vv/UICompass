@@ -80,7 +80,7 @@ stock CompassHeadingNorth(angle)
 	if (angle >= uic__max_N)
 		angle = uic__max_directions - angle + uic__min_N;
 	else
-		angle = ~(angle - uic__min_N) | 1;
+		angle = ~(angle - uic__min_N) + 1;
 
 	return angle;
 }
