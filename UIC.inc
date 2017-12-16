@@ -1,3 +1,9 @@
+/*
+	UICompass V5
+	by m1n1vv
+
+*/
+
 #if  defined UICOMPASS
 	#endinput
 #endif
