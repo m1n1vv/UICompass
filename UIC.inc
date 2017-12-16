@@ -26,7 +26,6 @@ static const
 	};
 
 static
-	uic__N,
 	uic__min_N,
 	uic__max_N,
 	uic__number_main_direction,
@@ -71,14 +70,14 @@ stock CreateCompassString(angle)
 
 stock CompassHeadingNorth(angle)
 {
-	uic__N = angle / UICOMPASS_STEP;
+	angle /= UICOMPASS_STEP;
 
-	if (uic__N >= uic__max_N)
-		uic__N = uic__max_directions - uic__N + uic__min_N;
+	if (angle >= uic__max_N)
+		angle = uic__max_directions - angle + uic__min_N;
 	else
 		angle = ~(angle - uic__min_N) | 1;
 
-	return uic__N;
+	return angle;
 }
 
 public OnGameModeInit()
