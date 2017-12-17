@@ -22,6 +22,7 @@ stock GetDirectionOfAircraft(&Float:angle, &Float:x, &Float:y, &Float:z, &Float:
 //Пример:
 
 static
+    obj,
     Float:x,
     Float:y,
     Float:z,
