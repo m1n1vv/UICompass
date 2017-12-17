@@ -3,7 +3,7 @@ stock GetDirectionOfAircraft(&Float:angle, &Float:x, &Float:y, &Float:z, &Float:
     static
         Float:distance = 4000.0;
 
-    z = 30.0;
+    z = 200.0;
     angle = floatrandom(180);
     x = 0.0 + distance * -floatsin(angle, degrees);
     y = 0.0 + distance * floatcos(angle, degrees);
