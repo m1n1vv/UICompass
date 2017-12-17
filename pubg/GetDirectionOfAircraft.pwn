@@ -1,6 +1,6 @@
 #define floatrandom(%0) (float(random(%0))+float(random(1000))/1000)
 
-stock GetDirectionOfAircraft(&Float:angle, &Float:x, &Float:y, &Float:z, &Float:point_x, &Float:point_y, Float:fault = 0.0)
+stock GetDirectionOfAircraft(&Float:angle, &Float:x, &Float:y, &Float:z, &Float:fpoint_x, &Float:fpoint_y, Float:fault = 0.0)
 {
     static
         Float:distance = 4000.0;
@@ -12,8 +12,8 @@ stock GetDirectionOfAircraft(&Float:angle, &Float:x, &Float:y, &Float:z, &Float:
     
     distance *= 2.0;
     angle += fault + floatrandom(90) - 45.0;
-    point_x = x + distance * -floatsin(angle, degrees);
-    point_y = y + distance * floatcos(angle, degrees);
+    fpoint_x = x + distance * -floatsin(angle, degrees);
+    fpoint_y = y + distance * floatcos(angle, degrees);
     distance = 4000.0;
     
     return 1;
