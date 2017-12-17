@@ -1,3 +1,5 @@
+#define floatrandom(%0) (float(random(%0))+float(random(1000))/1000)
+
 stock GetDirectionOfAircraft(&Float:angle, &Float:x, &Float:y, &Float:z, &Float:point_x, &Float:point_y, Float:fault = 0.0)
 {
     static
