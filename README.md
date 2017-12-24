@@ -1,7 +1,7 @@
-# UICompass v0.6
+# UICompass v0.7
 
 <p align="center">
-<img width="700" src="http://tscars.narod.ru/p-w/new/N.png">
+<img width="700" src="http://tscars.narod.ru/p-w/new/N1.png">
 </p>
 
 * [UICompass [RU]](https://github.com/m1n1vv/UICompass/wiki/UICompass-RU)
