@@ -1,7 +1,26 @@
-/*
-	UICompass v0.6
-	by m1n1vv
-*/
+/*==========================================================================
+
+	Copyright (c) 2017 Yakovlev Ivan.
+
+This software is provided 'as-is', without any express or implied warranty.
+In no event will the authors be held liable for any damages arising from the
+use of this software.
+
+Permission is granted to anyone to use this software for
+any purpose, including commercial applications, and to alter it and
+redistribute it freely, subject to the following restrictions:
+
+1.	The origin of this software must not be misrepresented; you must not
+	claim that you wrote the original software. If you use this software in
+	a product, an acknowledgment in the product documentation would be
+	appreciated but is not required.
+
+2.	Altered source versions must be plainly marked as such, and must not be
+	misrepresented as being the original software.
+
+3.	This notice may not be removed or altered from any source distribution.
+
+=========================================================================*/
 
 #if  defined UICOMPASS
 	#endinput
@@ -9,51 +28,61 @@
 #define UICOMPASS
 
 #if !defined MAX_UICOMPASS_TD
-	#define MAX_UICOMPASS_TD		7
-#endif
-
-#if !defined UICOMPASS_STEP
-	#define UICOMPASS_STEP			15
+	#define MAX_UICOMPASS_TD			7
 #endif
 
 #if MAX_UICOMPASS_TD % 2 == 0
-	#error only an odd number of TextDraws is supported
+	#error only supported with odd number of TD
+#endif
+
+#if !defined MAX_UICOMPASS_STEP
+	#define MAX_UICOMPASS_STEP			15
+#endif
+
+#if !defined MIN_UICOMPASS_STEP
+	#define MIN_UICOMPASS_STEP			5
+#endif
+
+#if !defined FIX_UICOMPASS_VALUE
+	#define FIX_UICOMPASS_VALUE(%0)			(%0 / 3 + 5)
 #endif
 
 static const
 	uic__scale = 360,
 	uic__interval_main_directions = 360 / 8,
-	uic__max_directions = 360 / UICOMPASS_STEP,
-	uic__error = UICOMPASS_STEP / 3 + 1,
+	uic__max_directions = 360 / MAX_UICOMPASS_STEP,
+	uic__get_n = (MAX_UICOMPASS_TD + 1) / 2,
 	uic__str_main_direction[][] =
 	{
 		"NE", "E", "SE", "S", "SW", "W", "NW", "N"
 	};
 
 static
-	uic__min_N,
-	uic__max_N,
+	uic__min_n,
+	uic__max_n,
 	uic__number_main_direction,
 	uic__round,
 	uic__multiple,
+	uic__error,
 	uic__result,
 	uic__string[4];
 
-stock GetCompassDirection(Float:angle)
+stock RoundCompassDirection(Float:angle, round = MAX_UICOMPASS_STEP)
 {
 	uic__round = floatround(angle);
-	uic__multiple = uic__round / UICOMPASS_STEP;
-	uic__result = uic__multiple * UICOMPASS_STEP;
+	uic__error = FIX_UICOMPASS_VALUE(round);
+	uic__multiple = uic__round / round;
+	uic__result = uic__multiple * round;
 
 	if (uic__round - uic__result > uic__error)
-		uic__result = ++uic__multiple * UICOMPASS_STEP;
+		uic__result = ++uic__multiple * round;
 
 	uic__result = uic__scale - uic__result;
 
 	return uic__result;
 }
 
-stock CreateCompassString(angle)
+stock CreateCompassString(angle, round = MAX_UICOMPASS_STEP)
 {
 	uic__number_main_direction = 0;
 
@@ -62,7 +91,7 @@ stock CreateCompassString(angle)
 	if (angle == 0)
 		angle = uic__scale;
 	
-	if (angle % uic__interval_main_directions == 0)
+	if (angle % uic__interval_main_directions == 0  && round == MAX_UICOMPASS_STEP)
 		uic__number_main_direction = angle / uic__interval_main_directions;
 
 	if (uic__number_main_direction != 0)
@@ -75,23 +104,20 @@ stock CreateCompassString(angle)
 
 stock CompassHeadingNorth(angle)
 {
-	angle /= UICOMPASS_STEP;
+	angle /= MAX_UICOMPASS_STEP;
 
-	if (angle >= uic__max_N)
-		angle = uic__max_directions - angle + uic__min_N;
+	if (angle >= uic__max_n)
+		angle = uic__max_directions - angle + uic__min_n;
 	else
-		angle = ~(angle - uic__min_N) + 1;
+		angle = ~(angle - uic__min_n) + 1;
 
 	return angle;
 }
 
 public OnGameModeInit()
 {
-	static const
-		getN = (MAX_UICOMPASS_TD + 1) / 2; 
-
-	uic__min_N = getN - 1;
-	uic__max_N = uic__max_directions - getN;
+	uic__min_n = uic__get_n - 1;
+	uic__max_n = uic__max_directions - uic__get_n;
 
 #if defined uic__OnGameModeInit
 	uic__OnGameModeInit();
@@ -108,3 +134,8 @@ public OnGameModeInit()
 #if defined uic__OnGameModeInit
 	forward uic__OnGameModeInit();
 #endif
+
+/*
+	UICompass v0.7
+	by m1n1vv
+*/
