@@ -1,4 +1,5 @@
-# UICompass v0.7
+# UICompass
+> Версия: 0.7
 
 <p align="center">
 <img width="700" src="http://tscars.narod.ru/p-w/new/N1.png">
